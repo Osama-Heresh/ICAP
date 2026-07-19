@@ -325,13 +325,8 @@ export default function App() {
 
   const isRTL = locale === 'ar';
 
-  // Render Login page if not authenticated
-  if (!currentUser) {
-    return <AuthView onLogin={handleLogin} locale={locale} />;
-  }
-
   // Load workspace-specific config based on role
-  const workspaceConfig = WORKSPACES[currentUser.role];
+  const workspaceConfig = currentUser ? WORKSPACES[currentUser.role] : undefined;
   const navItems = workspaceConfig ? workspaceConfig.menus : [];
 
   // --- ROLE-BASED ACCESS CONTROL (RBAC) FOR LOGS AND NOTIFICATIONS ---
@@ -461,6 +456,11 @@ export default function App() {
     }
     return notifications;
   }, [notifications, currentUser]);
+
+  // Render Login page if not authenticated
+  if (!currentUser) {
+    return <AuthView onLogin={handleLogin} locale={locale} />;
+  }
 
   const translatedNavNames: Record<string, string> = {
     'Dashboard': isRTL ? 'لوحة القيادة' : 'Dashboard',
