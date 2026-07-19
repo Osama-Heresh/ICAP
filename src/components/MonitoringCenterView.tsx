@@ -33,6 +33,7 @@ interface MonitoringCenterViewProps {
   locale: 'en' | 'ar';
   theme: 'light' | 'dark';
   onTriggerActivityLog: (action: string, details: string) => void;
+  initialSubTab?: 'dashboard' | 'rules' | 'events' | 'alerts' | 'reviews' | 'risk_map' | 'health';
 }
 
 // ----------------------------------------------------
@@ -160,12 +161,21 @@ const SEEDED_DEPARTMENTS = [
 export default function MonitoringCenterView({
   locale,
   theme,
-  onTriggerActivityLog
+  onTriggerActivityLog,
+  initialSubTab
 }: MonitoringCenterViewProps) {
   const isRTL = locale === 'ar';
 
   // Sub Tab states
-  const [activeSubTab, setActiveSubTab] = useState<'dashboard' | 'rules' | 'events' | 'alerts' | 'reviews' | 'risk_map' | 'health'>('dashboard');
+  const [activeSubTab, setActiveSubTab] = useState<'dashboard' | 'rules' | 'events' | 'alerts' | 'reviews' | 'risk_map' | 'health'>(
+    initialSubTab || 'dashboard'
+  );
+
+  useEffect(() => {
+    if (initialSubTab) {
+      setActiveSubTab(initialSubTab);
+    }
+  }, [initialSubTab]);
 
   // Interactive Database state layers (Requirement 17 & 18)
   const [rules, setRules] = useState<MonitoringRule[]>(SEEDED_MONITORING_RULES);

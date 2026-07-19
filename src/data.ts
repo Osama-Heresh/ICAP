@@ -15,6 +15,13 @@ import {
 // Demo Credentials
 export const DEMO_CREDENTIALS = [
   {
+    email: 'superadmin@icap-demo.com',
+    password: 'Super123!',
+    role: 'SUPER ADMIN' as const,
+    name: 'Ali Al-Mubarak',
+    jobTitle: 'Platform Administrator'
+  },
+  {
     email: 'admin@icap-demo.com',
     password: 'Admin123!',
     role: 'ORGANIZATION ADMIN' as const,
@@ -41,6 +48,55 @@ export const DEMO_CREDENTIALS = [
     role: 'SHARIA REVIEWER' as const,
     name: 'Sheikh Dr. Ibrahim Al-Khaled',
     jobTitle: 'Chairman of Sharia Board'
+  },
+  {
+    email: 'exec@icap-demo.com',
+    password: 'Exec123!',
+    role: 'EXECUTIVE USER' as const,
+    name: 'Yousef Al-Ghamdi',
+    jobTitle: 'Chief Executive Officer'
+  },
+  {
+    email: 'partner@icap-demo.com',
+    password: 'Partner123!',
+    role: 'PARTNER' as const,
+    name: 'Zaid Al-Harbi',
+    jobTitle: 'Strategic Partner'
+  },
+  {
+    email: 'developer@icap-demo.com',
+    password: 'Developer123!',
+    role: 'DEVELOPER' as const,
+    name: 'Tariq Al-Fahad',
+    jobTitle: 'Lead Developer'
+  },
+  {
+    email: 'csm@icap-demo.com',
+    password: 'Csm123!',
+    role: 'CUSTOMER SUCCESS MANAGER' as const,
+    name: 'Sari Al-Rayan',
+    jobTitle: 'Senior Customer Success Manager'
+  },
+  {
+    email: 'customer@icap-demo.com',
+    password: 'Customer123!',
+    role: 'CUSTOMER USER' as const,
+    name: 'Sheikh Ahmed Al-Suwaidi',
+    jobTitle: 'Corporate Client Representative'
+  },
+  {
+    email: 'sales@icap-demo.com',
+    password: 'Sales123!',
+    role: 'SALES EXECUTIVE' as const,
+    name: 'Layla Al-Amri',
+    jobTitle: 'Islamic Sales Executive'
+  },
+  {
+    email: 'pm@icap-demo.com',
+    password: 'Pm123!',
+    role: 'PROJECT MANAGER' as const,
+    name: 'Hani Shaker',
+    jobTitle: 'Lead Delivery Project Manager'
   }
 ];
 

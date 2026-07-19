@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Shield,
   FileText,
@@ -126,17 +126,27 @@ interface AuditCenterViewProps {
   locale: 'en' | 'ar';
   theme: 'light' | 'dark';
   onTriggerActivityLog: (action: string, details: string) => void;
+  initialSubTab?: 'dashboard' | 'planning' | 'engagements' | 'procedures' | 'papers' | 'evidence' | 'findings' | 'actions' | 'assistant';
 }
 
 export default function AuditCenterView({
   locale,
   theme,
-  onTriggerActivityLog
+  onTriggerActivityLog,
+  initialSubTab
 }: AuditCenterViewProps) {
   const isRTL = locale === 'ar';
 
   // State Management simulating a database
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'planning' | 'engagements' | 'procedures' | 'papers' | 'evidence' | 'findings' | 'actions' | 'assistant'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'planning' | 'engagements' | 'procedures' | 'papers' | 'evidence' | 'findings' | 'actions' | 'assistant'>(
+    initialSubTab || 'dashboard'
+  );
+
+  useEffect(() => {
+    if (initialSubTab) {
+      setActiveTab(initialSubTab);
+    }
+  }, [initialSubTab]);
 
   // Interactive Audits
   const [audits, setAudits] = useState<Audit[]>([

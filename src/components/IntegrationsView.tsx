@@ -89,25 +89,33 @@ export default function IntegrationsView({
     'dashboard' | 'connected' | 'marketplace' | 'mapping' | 'jobs' | 'api' | 'sdk' | 'simulator'
   >('simulator');
 
+  // Helper for safe localStorage parsing
+  const getStoredItem = <T,>(key: string, fallback: T): T => {
+    try {
+      const saved = localStorage.getItem(key);
+      if (!saved) return fallback;
+      return JSON.parse(saved) as T;
+    } catch (e) {
+      console.warn(`Error parsing Integrations localStorage key "${key}":`, e);
+      return fallback;
+    }
+  };
+
   // Integrations state (Local persistence mirror)
   const [integrations, setIntegrations] = useState<Integration[]>(() => {
-    const saved = localStorage.getItem('icap_integrations_list');
-    return saved ? JSON.parse(saved) : DEMO_INTEGRATIONS;
+    return getStoredItem<Integration[]>('icap_integrations_list', DEMO_INTEGRATIONS);
   });
 
   const [syncLogs, setSyncLogs] = useState<SyncLog[]>(() => {
-    const saved = localStorage.getItem('icap_sync_logs_list');
-    return saved ? JSON.parse(saved) : DEMO_SYNC_LOGS;
+    return getStoredItem<SyncLog[]>('icap_sync_logs_list', DEMO_SYNC_LOGS);
   });
 
   const [mappings, setMappings] = useState<DataMapping[]>(() => {
-    const saved = localStorage.getItem('icap_data_mappings_list');
-    return saved ? JSON.parse(saved) : DEMO_DATA_MAPPINGS;
+    return getStoredItem<DataMapping[]>('icap_data_mappings_list', DEMO_DATA_MAPPINGS);
   });
 
   const [errors, setErrors] = useState<ErpErrorRecord[]>(() => {
-    const saved = localStorage.getItem('icap_erp_errors_list');
-    return saved ? JSON.parse(saved) : DEMO_ERP_ERRORS;
+    return getStoredItem<ErpErrorRecord[]>('icap_erp_errors_list', DEMO_ERP_ERRORS);
   });
 
   // State synchronization

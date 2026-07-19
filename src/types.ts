@@ -19,7 +19,13 @@ export type UserRole =
   | 'AUDITOR'
   | 'SHARIA REVIEWER'
   | 'EXECUTIVE USER'
-  | 'EMPLOYEE';
+  | 'EMPLOYEE'
+  | 'PARTNER'
+  | 'DEVELOPER'
+  | 'CUSTOMER SUCCESS MANAGER'
+  | 'CUSTOMER USER'
+  | 'SALES EXECUTIVE'
+  | 'PROJECT MANAGER';
 
 export interface User {
   id: string;
