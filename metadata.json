@@ -1,5 +1,5 @@
 {
-  "name": "ICAP",
+  "name": "Islamic Compliance AI Platform",
   "description": "Islamic Compliance AI Platform for Enterprise AI-Powered Governance, Audit Support, and Digital Certification.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
