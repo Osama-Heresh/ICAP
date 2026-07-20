@@ -78,6 +78,7 @@ import GlobalComplianceCenterView from './components/GlobalComplianceCenterView'
 import MarketplaceView from './components/MarketplaceView';
 import EnterprisePortalView from './components/EnterprisePortalView';
 import CustomerLifecycleView from './components/CustomerLifecycleView';
+import IKRView from './components/IKRView';
 
 export default function App() {
   // Helper for safe localStorage parsing (Requirement: prevent blank screens due to malformed storage)
@@ -203,7 +204,10 @@ export default function App() {
     if (currentUser) {
       const config = WORKSPACES[currentUser.role];
       if (config) {
-        const allowedTabs = config.menus.map((m) => m.name);
+        const allowedTabs = [
+          ...config.menus.map((m) => m.name),
+          'Knowledge Repository'
+        ];
         if (!allowedTabs.includes(activeTab)) {
           setActiveTab('Dashboard');
         }
@@ -327,7 +331,10 @@ export default function App() {
 
   // Load workspace-specific config based on role
   const workspaceConfig = currentUser ? WORKSPACES[currentUser.role] : undefined;
-  const navItems = workspaceConfig ? workspaceConfig.menus : [];
+  const navItems = workspaceConfig ? [
+    ...workspaceConfig.menus,
+    { name: 'Knowledge Repository', icon: Database, id: 'ikr-database' }
+  ] : [];
 
   // --- ROLE-BASED ACCESS CONTROL (RBAC) FOR LOGS AND NOTIFICATIONS ---
   const filteredActivityLogs = useMemo(() => {
@@ -482,6 +489,7 @@ export default function App() {
     'Developer Portal': isRTL ? 'بوابة المطورين' : 'Developer Portal',
     'Production Readiness': isRTL ? 'جاهزية التشغيل والتحصين' : 'Production Readiness',
     'Settings': isRTL ? 'الإعدادات' : 'Settings',
+    'Knowledge Repository': isRTL ? 'مستودع المعرفة الإسلامي الذكي (IKR)' : 'Knowledge Repository (IKR)',
 
     // Super Admin custom menus
     'Organizations': isRTL ? 'المؤسسات المسجلة' : 'Organizations',
@@ -1036,6 +1044,14 @@ export default function App() {
 
           {(activeTab === 'Production Readiness' || activeTab === 'System Health' || activeTab === 'ICAP Readiness') && (
             <ProductionReadinessView
+              locale={locale}
+              theme={theme}
+              onTriggerActivityLog={triggerActivityLog}
+            />
+          )}
+
+          {activeTab === 'Knowledge Repository' && (
+            <IKRView
               locale={locale}
               theme={theme}
               onTriggerActivityLog={triggerActivityLog}
